@@ -1,118 +1,116 @@
-const $animation = $('.js-animation');
-const $progress = $animation.find('.js-progress');
-const $frame1 = $animation.find('#frame-1');
-const $frame2 = $animation.find('#frame-2');
-const $frame3 = $animation.find('#frame-3');
-const $frame4 = $animation.find('#frame-4');
+(function(){
+    const $animation = document.querySelector('.js-animation');
+    if(!$animation) return;
 
-const TL = new TimelineLite({
-    onComplete: function(){
-        // Restart Timeline
-        this.restart();
-    }
-});
+    const $frame1 = $animation.querySelector('#frame-1');
+    const $frame2 = $animation.querySelector('#frame-2');
+    const $frame3 = $animation.querySelector('#frame-3');
+    const $frame4 = $animation.querySelector('#frame-4');
+    const $progress = $animation.querySelector('.js-progress');
 
+    const TL = new TimelineLite({
+        onComplete: function(){
+            // Infinite Loop
+            this.restart();
 
-// Frame 1
-TL.add([
-    TweenLite.fromTo($progress, 4, {
-        width: "0%"
-    }, {
-        width: "100%",
-        ease: Power1.easeInOut
-    }),
-    TweenLite.to($frame1.find('.js-img'), 5, {
-        scale: 1.1,
-        ease: Power0.easeNone
-    }),
-    TweenLite.from($frame1.find('.js-content'), 2, {
-        opacity: 0,
-        scale: 0.5,
-        yPercent: 20
-    })
-]);
-
-// Frame 2
-TL.add([
-    TweenLite.fromTo($progress, 4, {
-        width: "0%"
-    }, {
-        width: "100%",
-        ease: Power1.easeInOut
-    }),
-    TweenLite.fromTo($frame2, 1, {
-        opacity: 0
-    }, {
-        opacity: 1
-    }),
-    TweenLite.from($frame2.find('.js-img'), 5, {
-        scale: 1.05,
-        xPercent: 3,
-        ease: Power0.easeNone
-    }),
-    TweenLite.from($frame2.find('.js-content'), 2, {
-        opacity: 0,
-        scale: 0.5,
-        yPercent: 20
-    })
-], "-=1");
-
-// Frame 3
-TL.add([
-    TweenLite.fromTo($progress, 4, {
-        width: "0%"
-    }, {
-        width: "100%",
-        ease: Power1.easeInOut
-    }),
-    TweenLite.fromTo($frame3, 1, {
-        opacity: 0
-    }, {
-        opacity: 1
-    }),
-    TweenLite.to($frame3.find('.js-img'), 5, {
-        scale: 1.3,
-        xPercent: -6,
-        ease: Power0.easeNone
-    }),
-    TweenLite.from($frame3.find('.js-content'), 2, {
-        opacity: 0,
-        scale: 0.5,
-        yPercent: 20
-    })
-], "-=1");
-
-// Frame 4
-TL.add([
-    TweenLite.fromTo($progress, 8, {
-        width: "0%"
-    }, {
-        width: "100%",
-        ease: Power1.easeInOut
-    }),
-    TweenLite.fromTo($frame4, 1, {
-        opacity: 0
-    }, {
-        opacity: 1
-    }),
-    TweenLite.from($frame4.find('.js-img'), 8, {
-        scale: 1.4,
-        ease: Power0.easeNone
-    }),
-    TweenLite.from($frame4.find('.js-content'), 2, {
-        opacity: 0,
-        scale: 0.5,
-        yPercent: 20
-    })
-], "-=1");
-
-TL.call(function(){
-    $frame2.css('opacity', 0);
-    $frame3.css('opacity', 0);
-
-    TweenLite.fromTo($frame4, 1, {
-        opacity: 1
-    }, {
-        opacity: 0
+            TweenLite.fromTo($frame4, 1, {
+                opacity: 1
+            }, {
+                opacity: 0
+            });
+        }
     });
-});
+
+    // FRAME 1
+    TL.add([
+        TweenLite.fromTo($progress, 4, {
+            width: "0%"
+        }, {
+            width: "100%",
+            ease: Power1.easeInOut
+        }),
+        TweenLite.from($frame1.querySelector('.js-content'), 1.5, {
+            scale: 0.5,
+            opacity: 0,
+            yPercent: 30
+        }),
+        TweenLite.to($frame1.querySelector('.js-img'), 5, {
+            scale: 1.1,
+            ease: Power0.easeInOut
+        })
+    ]);
+
+    // FRAME 2
+    TL.add([
+        TweenLite.fromTo($frame2, 1, {
+            opacity: 0
+        }, {
+            opacity: 1
+        }),
+        TweenLite.fromTo($progress, 4, {
+            width: "0%"
+        }, {
+            width: "100%",
+            ease: Power1.easeInOut
+        }),
+        TweenLite.from($frame2.querySelector('.js-content'), 1.5, {
+            scale: 0.5,
+            opacity: 0,
+            yPercent: 30
+        }),
+        TweenLite.from($frame2.querySelector('.js-img'), 5, {
+            scale: 1.2,
+            xPercent: 4,
+            ease: Power0.easeInOut
+        })
+    ], "-=1");
+
+    // FRAME 3
+    TL.add([
+        TweenLite.fromTo($frame3, 1, {
+            opacity: 0
+        }, {
+            opacity: 1
+        }),
+        TweenLite.fromTo($progress, 4, {
+            width: "0%"
+        }, {
+            width: "100%",
+            ease: Power1.easeInOut
+        }),
+        TweenLite.from($frame3.querySelector('.js-content'), 1.5, {
+            scale: 1.3,
+            opacity: 0,
+            yPercent: 30
+        }),
+        TweenLite.to($frame3.querySelector('.js-img'), 5, {
+            scale: 1.2,
+            xPercent: -4,
+            ease: Power0.easeInOut
+        })
+    ], "-=1");
+
+    // FRAME 4
+    TL.add([
+        TweenLite.fromTo($frame4, 1, {
+            opacity: 0
+        }, {
+            opacity: 1
+        }),
+        TweenLite.fromTo($progress, 8, {
+            width: "0%"
+        }, {
+            width: "100%",
+            ease: Power1.easeInOut
+        }),
+        TweenLite.from($frame4.querySelector('.js-content'), 2, {
+            scale: 0.8,
+            opacity: 0
+        }),
+        TweenLite.from($frame4.querySelector('.js-img'), 8, {
+            scale: 1.4,
+            ease: Power0.easeInOut
+        })
+    ], "-=1");
+
+})();
